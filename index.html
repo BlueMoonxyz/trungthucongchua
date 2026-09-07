@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07122f" />
+  <title>Trung Thu vui vẻ</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: white; }
+    body { margin: 0; min-height: 100svh; overflow: hidden; background: #020715; }
+    button { font: inherit; }
+    #scene {
+      position: fixed; inset: -5%; overflow: hidden;
+      background:
+        radial-gradient(circle at 72% 17%, rgba(255,224,132,.18), transparent 20%),
+        radial-gradient(circle at 25% 75%, rgba(45,82,170,.24), transparent 34%),
+        linear-gradient(160deg, #05091d 0%, #0a1742 55%, #160b35 100%);
+      transform-style: preserve-3d;
+      transition: transform .18s ease-out;
+    }
+    #scene::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,.58) 100%);
+    }
+    .stars { position: absolute; inset: 0; opacity: .8; background-image:
+      radial-gradient(circle, #fff 0 1px, transparent 1.6px),
+      radial-gradient(circle, #ffd978 0 1px, transparent 1.8px);
+      background-size: 62px 62px, 97px 97px; background-position: 3px 8px, 35px 40px;
+      animation: twinkle 3s ease-in-out infinite alternate;
+    }
+    .moon { position: absolute; width: min(32vw, 170px); aspect-ratio: 1; right: 9%; top: 9%; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fffbd7 0 16%, #ffe58d 48%, #eea733 100%);
+      box-shadow: 0 0 25px #ffe89b, 0 0 80px rgba(255,205,91,.62), 0 0 150px rgba(255,190,57,.25);
+      transform: translateZ(-20px);
+    }
+    .moon::before, .moon::after { content:""; position:absolute; border-radius:50%; background:rgba(181,119,43,.12); }
+    .moon::before { width:27%; height:20%; left:18%; top:25%; }
+    .moon::after { width:18%; height:15%; right:20%; bottom:27%; }
+    .lantern { position:absolute; top:3%; width:58px; height:72px; border-radius:48%; z-index:3;
+      background:repeating-linear-gradient(90deg,#a71628 0 9px,#e84a3b 9px 18px);
+      border:4px solid #f7b34c; box-shadow:0 0 24px rgba(255,79,55,.5); animation:sway 3s ease-in-out infinite alternate;
+      transform-origin:50% -30px;
+    }
+    .lantern::before { content:""; position:absolute; width:2px; height:45px; background:#e9bc66; left:50%; bottom:100%; }
+    .lantern::after { content:""; position:absolute; width:4px; height:35px; border-left:3px solid #e9bc66; border-right:3px solid #e9bc66; left:21px; top:70px; }
+    .lantern.left { left:9%; } .lantern.right { right:34%; animation-delay:-1.3s; scale:.72; }
+    #rain { position:absolute; inset:0; overflow:hidden; transform:translateZ(5px); }
+    .wish { position:absolute; top:-15vh; color:rgba(255,231,157,.34); font-weight:650; letter-spacing:.04em;
+      white-space:nowrap; text-shadow:0 0 12px rgba(255,199,85,.35); animation:fall linear infinite; }
+    .center { position:absolute; inset:0; z-index:5; display:grid; place-items:center; padding:24px; perspective:900px; }
+    .card { width:min(92vw,780px); min-height:260px; display:grid; place-items:center; text-align:center; transform:translateZ(70px);
+      padding:34px 22px; border:1px solid rgba(255,224,157,.22); border-radius:30px;
+      background:linear-gradient(135deg,rgba(10,21,58,.42),rgba(47,13,58,.26));
+      backdrop-filter:blur(8px); box-shadow:0 26px 90px rgba(0,0,0,.32), inset 0 0 40px rgba(255,218,129,.04);
+    }
+    #lyric { margin:0; max-width:18ch; font-family:Georgia,"Times New Roman",serif; font-size:clamp(2rem,8vw,5.5rem); line-height:1.12;
+      color:#fff3c3; text-wrap:balance; text-shadow:0 2px 0 #9b5124,0 0 18px rgba(255,210,105,.75),0 0 48px rgba(255,166,61,.36);
+      opacity:0; transform:translateY(24px) scale(.96); filter:blur(8px); transition:opacity .65s,transform .65s,filter .65s;
+    }
+    #lyric.show { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+    #ending { display:none; }
+    #start { position:fixed; inset:0; z-index:20; display:grid; place-items:center; padding:24px;
+      background:radial-gradient(circle at 50% 35%,#172957 0,#070b20 55%,#02040d 100%); text-align:center; }
+    .intro h1 { margin:0 0 10px; font:700 clamp(2.3rem,11vw,5.8rem)/1 Georgia,serif; color:#ffe79a; text-shadow:0 0 35px rgba(255,202,74,.5); }
+    .intro p { margin:0 0 28px; color:#e9dcae; font-size:1rem; }
+    #startBtn { border:1px solid #ffe6a1; border-radius:999px; padding:15px 26px; color:#2b1600; font-weight:750;
+      background:linear-gradient(#fff3bf,#eeb74b); box-shadow:0 8px 34px rgba(255,193,66,.35); cursor:pointer; }
+    .hint { position:fixed; z-index:8; left:0; right:0; bottom:max(18px,env(safe-area-inset-bottom)); text-align:center;
+      color:rgba(255,255,255,.55); font-size:.8rem; pointer-events:none; transition:opacity 1s; }
+    @keyframes fall { to { transform:translateY(125vh) rotateZ(8deg); } }
+    @keyframes twinkle { to { opacity:.46; } }
+    @keyframes sway { to { transform:rotate(7deg); } }
+    @media (max-width:600px) { .card{min-height:230px}.lantern.right{right:22%}.hint{font-size:.75rem} }
+    @media (prefers-reduced-motion:reduce) { .stars,.lantern{animation:none}.wish{animation-duration:18s!important} }
+  </style>
+</head>
+<body>
+  <main id="scene">
+    <div class="stars"></div><div class="moon"></div>
+    <div class="lantern left"></div><div class="lantern right"></div>
+    <div id="rain" aria-hidden="true"></div>
+    <section class="center"><div class="card"><h2 id="lyric"></h2></div></section>
+  </main>
+  <div id="start"><div class="intro"><h1>Trung Thu vui vẻ</h1><p>Một món quà nhỏ dành cho bạn</p><button id="startBtn">Chạm để bắt đầu ✦</button></div></div>
+  <div class="hint" id="hint">Vuốt nhẹ để xoay không gian</div>
+  <audio id="music" preload="auto" src="music.mp3"></audio>
+  <script>
+    const rain=document.querySelector('#rain');
+    for(let i=0;i<32;i++){
+      const el=document.createElement('span'); el.className='wish'; el.textContent='Trung Thu vui vẻ';
+      el.style.left=(Math.random()*96)+'%'; el.style.fontSize=(12+Math.random()*12)+'px';
+      el.style.animationDuration=(7+Math.random()*9)+'s'; el.style.animationDelay=(-Math.random()*15)+'s';
+      el.style.opacity=.16+Math.random()*.35; rain.appendChild(el);
+    }
+    const cues=[
+      [0.0,'Nơi nào đều có hai ta'],
+      [3.5,'Chắc chắn sẽ là thiên đường'],
+      [7.0,'Chỉ cần được ở bên em'],
+      [10.1,'Anh bất chấp cho dù đâu'],
+      [13.3,'Đổi lại những phút vô tư cho em'],
+      [17.0,'Hiểu cho anh…'],
+      [19.0,'Trung Thu vui vẻ ✦']
+    ];
+    const music=document.querySelector('#music'), lyric=document.querySelector('#lyric'); let active=-1;
+    function sync(){
+      let next=0; for(let i=0;i<cues.length;i++) if(music.currentTime>=cues[i][0]) next=i;
+      if(next!==active){ active=next; lyric.classList.remove('show'); setTimeout(()=>{lyric.textContent=cues[next][1];lyric.classList.add('show')},180); }
+      if(!music.paused) requestAnimationFrame(sync);
+    }
+    document.querySelector('#startBtn').addEventListener('click',async()=>{
+      document.querySelector('#start').style.display='none'; lyric.textContent=cues[0][1]; lyric.classList.add('show');
+      try{await music.play();requestAnimationFrame(sync)}catch(e){lyric.textContent='Chạm lại để phát nhạc';}
+    });
+    music.addEventListener('ended',()=>{active=-1;lyric.textContent='Trung Thu vui vẻ ✦';lyric.classList.add('show')});
+    const scene=document.querySelector('#scene'); let sx=0,sy=0;
+    function tilt(x,y){const rx=(.5-y/innerHeight)*7,ry=(x/innerWidth-.5)*9;scene.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;}
+    addEventListener('pointermove',e=>{tilt(e.clientX,e.clientY);document.querySelector('#hint').style.opacity='0'});
+    addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY});
+    addEventListener('pointerup',()=>{scene.style.transform='rotateX(0) rotateY(0) scale(1.03)'});
+  </script>
+</body>
+</html>
