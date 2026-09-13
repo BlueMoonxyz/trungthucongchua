@@ -5,8 +5,9 @@
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#041023;color:#fff;font-family:"Be Vietnam Pro",system-ui,sans-serif}
 body{perspective:900px;touch-action:none}
 button{font:inherit}
-.stage{position:fixed;inset:-10%;overflow:hidden;background:#071329;transform:scale(1.12) rotateX(0deg) rotateY(0deg);transform-style:preserve-3d;will-change:transform;cursor:grab;user-select:none}
+.stage{position:fixed;inset:-10%;overflow:hidden;background:#071329;transform:scale(1.12) rotateX(0deg) rotateY(0deg);transform-style:preserve-3d;will-change:transform;cursor:grab;user-select:none;transition:filter 1.2s}
 .stage.dragging{cursor:grabbing}
+.stage.cinematic-mode{filter:brightness(.3) saturate(.72) blur(1px)}
 .backdrop{position:absolute;inset:-5%;background-image:linear-gradient(180deg,rgba(1,8,26,.02),rgba(1,7,18,.14)),url('trung-thu-bg.webp');background-size:cover;background-position:center 52%;filter:saturate(1.15) contrast(1.06) brightness(1.04);transform:translateZ(-90px) scale(1.15)}
 .backdrop:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 12%,rgba(255,225,147,.13),transparent 24%),linear-gradient(180deg,rgba(0,4,15,.02),rgba(0,3,14,.3) 100%);box-shadow:inset 0 0 120px rgba(0,2,12,.46)}
 .mist{position:absolute;z-index:2;inset:-20%;opacity:.24;filter:blur(34px);background:radial-gradient(ellipse at 18% 28%,rgba(220,230,255,.28),transparent 26%),radial-gradient(ellipse at 68% 18%,rgba(210,224,255,.2),transparent 24%),radial-gradient(ellipse at 48% 55%,rgba(171,199,239,.13),transparent 31%);animation:mistMove 18s ease-in-out infinite alternate;pointer-events:none;transform:translateZ(-25px)}
@@ -52,10 +53,11 @@ button{font:inherit}
 .sound{right:17px}.motion{left:17px}.motion.active{color:#2b1600;background:linear-gradient(180deg,#fff2b9,#e9a43a);box-shadow:0 0 25px rgba(255,177,54,.58)}
 .final-card{position:fixed;z-index:15;left:50%;top:50%;width:min(90vw,620px);padding:clamp(28px,6vw,52px);border:1px solid rgba(255,234,167,.48);border-radius:32px;text-align:center;background:radial-gradient(circle at top,rgba(126,54,10,.54),rgba(3,12,31,.86));box-shadow:0 24px 100px rgba(0,0,0,.68),0 0 55px rgba(255,157,44,.2);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transform:translate(-50%,-45%) scale(.88);transition:opacity .8s,transform .9s cubic-bezier(.16,.84,.23,1)}
 .final-card.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
-.final-card .moon{font-size:clamp(3rem,8vw,5.5rem);filter:drop-shadow(0 0 22px rgba(255,220,125,.72))}
+.final-card .moon{border:0;background:transparent;padding:0;font-size:clamp(3rem,8vw,5.5rem);filter:drop-shadow(0 0 22px rgba(255,220,125,.72));cursor:pointer;animation:moonPulse 2.5s ease-in-out infinite alternate}
 .final-card h2{margin:8px 0 14px;font:800 clamp(2rem,6vw,4rem)/1.15 "Playpen Sans","Be Vietnam Pro",cursive;color:#fff1b8}
 .final-card p{margin:0;color:#fff8dd;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.75}
-.final-card strong{color:#ffe283;font-size:1.08em}.final-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}.close-card,.yes-card{border:1px solid rgba(255,233,166,.6);border-radius:999px;padding:12px 20px;font-weight:800;cursor:pointer}.close-card{background:rgba(255,230,153,.12);color:#fff1ba}.yes-card{background:linear-gradient(180deg,#fff2b9,#e9a43a);color:#421d00;box-shadow:0 8px 28px rgba(255,164,35,.38)}.yes-card:hover{transform:translateY(-2px)}.final-card.accepted{box-shadow:0 24px 100px rgba(0,0,0,.68),0 0 95px rgba(255,189,58,.5)}
+.final-card strong{color:#ffe283;font-size:1.08em}.easter-egg{max-height:0;overflow:hidden!important;margin:0!important;color:#ffd978!important;font-size:.9rem!important;opacity:0;transition:max-height .7s,opacity .7s,margin .7s!important}.easter-egg.show{max-height:80px;margin-top:15px!important;opacity:1}.final-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}.yes-card{border:1px solid rgba(255,233,166,.8);border-radius:999px;padding:13px 24px;font-weight:800;cursor:pointer;background:linear-gradient(180deg,#fff2b9,#e9a43a);color:#421d00;box-shadow:0 8px 28px rgba(255,164,35,.38);transition:transform .2s,box-shadow .2s}.yes-card:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(255,164,35,.55)}.final-card.accepted{box-shadow:0 24px 100px rgba(0,0,0,.68),0 0 95px rgba(255,189,58,.5)}
+.cinematic{position:fixed;z-index:14;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(86,29,8,.16),rgba(0,3,13,.88));opacity:0;pointer-events:none;transition:opacity 1s}.cinematic.show{opacity:1}.heart-flight{position:absolute;inset:0}.heart-lantern{position:absolute;left:0;top:0;width:70px;height:92px;transform:translate(var(--sx),var(--sy)) scale(.72);opacity:0;filter:drop-shadow(0 0 20px #ff7c20);will-change:transform,opacity}.cinematic.show .heart-lantern{animation:heartGather 2.25s cubic-bezier(.2,.75,.15,1) forwards}.love-reveal{position:absolute;left:50%;top:50%;width:100%;transform:translate(-50%,135px) scale(.82);text-align:center;font:800 clamp(2.7rem,10vw,7rem)/1 "Playpen Sans","Be Vietnam Pro",cursive;letter-spacing:-.055em;color:#fff1b0;text-shadow:0 3px 0 #8a370d,0 0 26px #ffb332,0 0 80px rgba(255,77,19,.72);opacity:0}.cinematic.reveal .love-reveal{animation:loveReveal 1.2s cubic-bezier(.16,.84,.23,1) forwards}.cinematic.fade{opacity:0}
 @keyframes fall{0%{transform:translate3d(-4vw,-20vh,var(--depth,0px)) rotate(-4deg) scale(.92);opacity:0}
 8%{opacity:.92}
 85%{opacity:.78}
@@ -86,6 +88,9 @@ to{opacity:1;transform:none}
 }
 @keyframes secretFloat{from{transform:translateY(-7px) rotate(-3deg)}to{transform:translateY(7px) rotate(3deg)}}
 @keyframes discoveryFlash{0%{opacity:0}20%{opacity:.95}100%{opacity:0}}
+@keyframes heartGather{0%{transform:translate(var(--sx),var(--sy)) scale(.55) rotate(-15deg);opacity:0}15%{opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(.78) rotate(0);opacity:1}}
+@keyframes loveReveal{0%{opacity:0;transform:translate(-50%,155px) scale(.55);filter:blur(12px)}60%{opacity:1;transform:translate(-50%,137px) scale(1.06);filter:blur(0)}100%{opacity:1;transform:translate(-50%,135px) scale(1);filter:blur(0)}}
+@keyframes moonPulse{from{transform:scale(.96)}to{transform:scale(1.06)}}
 @media(max-width:650px){.stage{inset:-11%;transform:scale(1.12) rotateX(0deg) rotateY(0deg)}
 .backdrop{background-position:center}
 .lyrics{padding:12vw 7vw 25vw}
@@ -102,9 +107,9 @@ to{opacity:1;transform:none}
 
 </style>
 </head><body>
-<main class="stage" id="stage"><div class="backdrop"></div><div class="mist"></div><div class="lantern-glints"><i class="glint"></i><i class="glint"></i><i class="glint"></i><i class="glint"></i></div><div class="glow a"></div><div class="glow b"></div><canvas id="sparks"></canvas><div class="wishes" id="wishes"></div><div class="secret-lanterns" id="secretLanterns"><button class="secret-lantern" aria-label="Đèn bí mật 1"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 2"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 3"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 4"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 5"><span class="lantern-body" aria-hidden="true"></span></button></div><div class="sky-lanterns" id="skyLanterns"></div><section class="lyrics"><h2 id="lyric"></h2></section></main><canvas id="trail"></canvas>
-<section id="start"><div class="intro"><p class="eyebrow">Gửi đến người anh thích</p><h1>Trung Thu<br>vui vẻ</h1><p>Có 5 chiếc đèn đang giấu một lời nhắn…</p><button class="start-btn" id="startBtn">Bắt đầu tìm 💛</button></div><div class="countdown" id="countdown" aria-live="assertive"><span class="count-number" id="countNumber">3</span></div></section><button class="motion" id="motion" aria-label="Bật xoay theo chuyển động điện thoại" title="Xoay theo điện thoại">◇</button><button class="sound" id="sound" aria-label="Bật hoặc tắt nhạc">♫</button><div class="quest" id="quest"><span>Tìm đèn bí mật</span><b id="questCount">0/5</b></div><div id="progress"><div id="bar"></div></div><audio id="music" src="music.mp3" preload="auto" loop></audio>
-<p class="hint" id="hint">Xoay khung cảnh và chạm vào 5 chiếc đèn phát sáng 🏮</p><aside class="final-card" id="finalCard" aria-live="polite"><div class="moon">🌕</div><h2 id="cardTitle">Anh thích em 💛</h2><p id="cardText">Trung Thu này anh không cần bánh,<br>chỉ muốn có một cuộc hẹn với em thôi.<br><strong>Em đi chơi cùng anh nhé?</strong></p><div class="final-actions"><button class="yes-card" id="yesCard">Đồng ý 🏮</button></div></aside>
+<main class="stage" id="stage"><div class="backdrop"></div><div class="mist"></div><div class="lantern-glints"><i class="glint"></i><i class="glint"></i><i class="glint"></i><i class="glint"></i></div><div class="glow a"></div><div class="glow b"></div><canvas id="sparks"></canvas><div class="wishes" id="wishes"></div><div class="secret-lanterns" id="secretLanterns"><button class="secret-lantern" aria-label="Đèn bí mật 1"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 2"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 3"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 4"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 5"><span class="lantern-body" aria-hidden="true"></span></button></div><div class="sky-lanterns" id="skyLanterns"></div><section class="lyrics"><h2 id="lyric"></h2></section></main><canvas id="trail"></canvas><div class="cinematic" id="cinematic" aria-hidden="true"><div class="heart-flight" id="heartFlight"></div><div class="love-reveal">ANH THÍCH EM</div></div>
+<section id="start"><div class="intro"><p class="eyebrow">Gửi tới người đặc biệt</p><h1>Trung Thu<br>vui vẻ</h1><p>Có 5 chiếc đèn đang giấu một lời nhắn…</p><button class="start-btn" id="startBtn">Bắt đầu tìm 💛</button></div><div class="countdown" id="countdown" aria-live="assertive"><span class="count-number" id="countNumber">3</span></div></section><button class="motion" id="motion" aria-label="Bật xoay theo chuyển động điện thoại" title="Xoay theo điện thoại">◇</button><button class="sound" id="sound" aria-label="Bật hoặc tắt nhạc">♫</button><div class="quest" id="quest"><span>Tìm đèn bí mật</span><b id="questCount">0/5</b></div><div id="progress"><div id="bar"></div></div><audio id="music" src="music.mp3" preload="auto" loop></audio>
+<p class="hint" id="hint">Xoay khung cảnh và chạm vào 5 chiếc đèn phát sáng 🏮</p><aside class="final-card" id="finalCard" aria-live="polite"><button class="moon" id="secretMoon" aria-label="Giữ mặt trăng để mở lời nhắn bí mật">🌕</button><h2 id="cardTitle">Anh thích em 💛</h2><p id="cardText">Anh không biết sau này chúng ta sẽ thế nào,<br>nhưng hiện tại anh thật sự muốn được hiểu em nhiều hơn.<br><strong>Nếu em đồng ý, Trung Thu này đi cùng anh nhé?</strong></p><p class="easter-egg" id="easterEgg">Thật ra anh đã thích em lâu hơn em nghĩ đó.</p><div class="final-actions"><button class="yes-card" id="yesCard">Đồng ý 🥮</button></div></aside>
 <script>
 
 const cues=[{start:0,end:3,text:'Cứ yêu đi, đừng bận tâm chi ngày sau.'}
@@ -115,7 +120,7 @@ const cues=[{start:0,end:3,text:'Cứ yêu đi, đừng bận tâm chi ngày sau
 ];
 const wishes=document.querySelector('#wishes');for(let i=0;i<34;i++){const e=document.createElement('span'),depth=-55+Math.random()*165,near=(depth+55)/165;e.className='wish';e.textContent=Math.random()>.35?'✦':'·';e.style.left=(-3+Math.random()*98)+'%';e.style.fontSize=(8+near*16)+'px';e.style.animationDuration=(7.4-near*3.4)+'s';e.style.animationDelay=(-Math.random()*8)+'s';e.style.opacity=(.32+near*.48).toFixed(2);e.style.setProperty('--depth',depth.toFixed(0)+'px');wishes.appendChild(e)}
 
-const audio=document.querySelector('#music'),lyric=document.querySelector('#lyric'),bar=document.querySelector('#bar'),progress=document.querySelector('#progress'),sound=document.querySelector('#sound'),motion=document.querySelector('#motion'),start=document.querySelector('#start'),hint=document.querySelector('#hint'),quest=document.querySelector('#quest'),questCount=document.querySelector('#questCount'),finalCard=document.querySelector('#finalCard'),cardTitle=document.querySelector('#cardTitle'),cardText=document.querySelector('#cardText'),yesCard=document.querySelector('#yesCard'),skyLanterns=document.querySelector('#skyLanterns');let current=-1,raf,started=false;
+const audio=document.querySelector('#music'),lyric=document.querySelector('#lyric'),bar=document.querySelector('#bar'),progress=document.querySelector('#progress'),sound=document.querySelector('#sound'),motion=document.querySelector('#motion'),start=document.querySelector('#start'),hint=document.querySelector('#hint'),quest=document.querySelector('#quest'),questCount=document.querySelector('#questCount'),cinematic=document.querySelector('#cinematic'),heartFlight=document.querySelector('#heartFlight'),finalCard=document.querySelector('#finalCard'),cardTitle=document.querySelector('#cardTitle'),cardText=document.querySelector('#cardText'),secretMoon=document.querySelector('#secretMoon'),easterEgg=document.querySelector('#easterEgg'),yesCard=document.querySelector('#yesCard'),skyLanterns=document.querySelector('#skyLanterns');let current=-1,raf,started=false;
 function showCue(i){if(i===current)return;current=i;lyric.classList.remove('show');setTimeout(()=>{lyric.textContent=cues[i]?.text||'Trung Thu vui vẻ ✦';lyric.classList.add('show')}
 ,150)}
 function sync(){const t=audio.currentTime;bar.style.width=Math.min(100,t/audio.duration*100)+'%';if(!audio.paused)raf=requestAnimationFrame(sync)}
@@ -146,7 +151,7 @@ startBtn.onclick=async()=>{
   setTimeout(()=>start.style.display='none',950);
   try{
     audio.currentTime=0;
-    audio.volume=1;
+    audio.volume=.68;
     if(!unlocked||audio.paused)await audio.play();
     sync();
   }catch(e){
@@ -161,7 +166,7 @@ else{audio.pause();cancelAnimationFrame(raf);sound.textContent='×'}
   e.stopPropagation();
   finalCard.classList.add('accepted');
   cardTitle.textContent='Hẹn rồi nhé! 💛';
-  cardText.innerHTML='Anh sẽ nhớ lời đồng ý này đó.<br><strong>Trung Thu anh và em đi cùng nhau nhé 🏮</strong>';
+  cardText.innerHTML='Vậy từ hôm nay,<br><strong>cho anh được quan tâm em nhiều hơn nhé 🏮</strong>';
   yesCard.style.display='none';
   lyric.textContent='Vậy là Trung Thu này có đôi rồi ✦';
   for(let i=0;i<16;i++)setTimeout(()=>{
@@ -172,11 +177,65 @@ else{audio.pause();cancelAnimationFrame(raf);sound.textContent='×'}
 ;
 function releaseLantern(x,y){const e=document.createElement('span');e.className='sky-lantern';e.textContent='🏮';e.style.left=x+'px';e.style.top=y+'px';e.style.setProperty('--drift',(Math.random()*140-70)+'px');skyLanterns.appendChild(e);setTimeout(()=>e.remove(),6000)}
 
+function fadeMusic(target,duration=1000){
+  const from=audio.volume,startTime=performance.now();
+  function step(now){
+    const p=Math.min(1,(now-startTime)/duration);
+    audio.volume=from+(target-from)*p;
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+function startCinematic(){
+  if(cinematic.classList.contains('show'))return;
+  quest.classList.remove('show');
+  hint.classList.remove('show');
+  lyric.classList.remove('show');
+  stage.classList.add('cinematic-mode');
+  fadeMusic(.28,1100);
+  const buttons=[...document.querySelectorAll('.secret-lantern')];
+  const scale=Math.min(1,innerWidth/440);
+  const targets=[[-72,-58],[72,-58],[-112,5],[112,5],[0,92]];
+  heartFlight.innerHTML='';
+  buttons.forEach((button,i)=>{
+    const rect=button.getBoundingClientRect(),lamp=document.createElement('span');
+    lamp.className='heart-lantern';
+    lamp.innerHTML='<span class="lantern-body" aria-hidden="true"></span>';
+    lamp.style.setProperty('--sx',(rect.left+rect.width/2-35)+'px');
+    lamp.style.setProperty('--sy',(rect.top+rect.height/2-46)+'px');
+    lamp.style.setProperty('--tx',(innerWidth/2-35+targets[i][0]*scale)+'px');
+    lamp.style.setProperty('--ty',(innerHeight/2-70+targets[i][1]*scale)+'px');
+    lamp.style.animationDelay=(i*.08)+'s';
+    heartFlight.appendChild(lamp);
+  });
+  cinematic.classList.remove('fade','reveal');
+  cinematic.classList.add('show');
+  cinematic.setAttribute('aria-hidden','false');
+  setTimeout(()=>cinematic.classList.add('reveal'),2200);
+  setTimeout(()=>cinematic.classList.add('fade'),4550);
+  setTimeout(()=>{
+    finalCard.classList.add('show');
+    stage.classList.remove('cinematic-mode');
+    fadeMusic(.6,1000);
+  },5050);
+  setTimeout(()=>{
+    cinematic.classList.remove('show','fade','reveal');
+    cinematic.setAttribute('aria-hidden','true');
+    heartFlight.innerHTML='';
+  },5900);
+}
+
+let moonTimer;
+function openEasterEgg(){easterEgg.classList.add('show')}
+secretMoon.addEventListener('pointerdown',e=>{e.stopPropagation();clearTimeout(moonTimer);moonTimer=setTimeout(openEasterEgg,1800)});
+for(const eventName of ['pointerup','pointercancel','pointerleave'])secretMoon.addEventListener(eventName,()=>clearTimeout(moonTimer));
+secretMoon.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openEasterEgg()}});
+
 const clueTexts=[
-  'Có một người…',
-  'Mỗi lần nói chuyện với em, anh đều thấy rất vui…',
-  'Anh đã thích em khá lâu rồi…',
-  'Và anh là người đang gửi trang này…',
+  'Có một người',
+  'Mỗi lần nói chuyện với em đều thấy rất vui',
+  'Đã thích em khá lâu rồi',
+  'Và là người đang gửi trang này',
   'Chính là anh 💛'
 ];
 let foundLanterns=0,messageTimer;
@@ -205,7 +264,7 @@ document.querySelectorAll('.secret-lantern').forEach(button=>{
     for(let i=0;i<5;i++)addTrail(rect.left+rect.width/2+(Math.random()-.5)*50,rect.top+rect.height/2+(Math.random()-.5)*50);
     if(foundLanterns===5){
       quest.querySelector('span').textContent='Đã mở lời nhắn';
-      setTimeout(()=>finalCard.classList.add('show'),1900);
+      setTimeout(startCinematic,750);
     }
   });
 });
