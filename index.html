@@ -57,7 +57,7 @@ button{font:inherit}
 .final-card h2{margin:8px 0 14px;font:800 clamp(2rem,6vw,4rem)/1.15 "Playpen Sans","Be Vietnam Pro",cursive;color:#fff1b8}
 .final-card p{margin:0;color:#fff8dd;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.75}
 .final-card strong{color:#ffe283;font-size:1.08em}.easter-egg{max-height:0;overflow:hidden!important;margin:0!important;color:#ffd978!important;font-size:.9rem!important;opacity:0;transition:max-height .7s,opacity .7s,margin .7s!important}.easter-egg.show{max-height:80px;margin-top:15px!important;opacity:1}.final-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}.yes-card{border:1px solid rgba(255,233,166,.8);border-radius:999px;padding:13px 24px;font-weight:800;cursor:pointer;background:linear-gradient(180deg,#fff2b9,#e9a43a);color:#421d00;box-shadow:0 8px 28px rgba(255,164,35,.38);transition:transform .2s,box-shadow .2s}.yes-card:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(255,164,35,.55)}.final-card.accepted{box-shadow:0 24px 100px rgba(0,0,0,.68),0 0 95px rgba(255,189,58,.5)}
-.cinematic{position:fixed;z-index:14;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(86,29,8,.16),rgba(0,3,13,.88));opacity:0;pointer-events:none;transition:opacity 1s}.cinematic.show{opacity:1}.heart-flight{position:absolute;inset:0}.heart-lantern{position:absolute;left:0;top:0;width:70px;height:92px;transform:translate(var(--sx),var(--sy)) scale(.72);opacity:0;filter:drop-shadow(0 0 20px #ff7c20);will-change:transform,opacity}.cinematic.show .heart-lantern{animation:heartGather 2.25s cubic-bezier(.2,.75,.15,1) forwards}.love-reveal{position:absolute;left:50%;top:50%;width:100%;transform:translate(-50%,135px) scale(.82);text-align:center;font:800 clamp(2.7rem,10vw,7rem)/1 "Playpen Sans","Be Vietnam Pro",cursive;letter-spacing:-.055em;color:#fff1b0;text-shadow:0 3px 0 #8a370d,0 0 26px #ffb332,0 0 80px rgba(255,77,19,.72);opacity:0}.cinematic.reveal .love-reveal{animation:loveReveal 1.2s cubic-bezier(.16,.84,.23,1) forwards}.cinematic.fade{opacity:0}
+.cinematic{position:fixed;z-index:14;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(86,29,8,.16),rgba(0,3,13,.88));opacity:0;pointer-events:none;transition:opacity 1s}.cinematic.show{opacity:1}.heart-flight{position:absolute;inset:0}.heart-lantern{position:absolute;left:0;top:0;width:70px;height:92px;transform:translate(var(--sx),var(--sy)) scale(.5);opacity:0;filter:drop-shadow(0 0 14px #ff7c20);will-change:transform,opacity}.heart-lantern .lantern-body{animation:heartGlow 1.15s ease-in-out infinite alternate}.cinematic.show .heart-lantern{animation:heartGather 2.45s cubic-bezier(.2,.75,.15,1) var(--delay,0s) forwards}.love-name,.love-reveal{position:absolute;left:50%;top:50%;width:100%;transform:translate(-50%,135px) scale(.82);text-align:center;font:800 clamp(2.7rem,10vw,7rem)/1 "Playpen Sans","Be Vietnam Pro",cursive;color:#fff1b0;text-shadow:0 3px 0 #8a370d,0 0 26px #ffb332,0 0 80px rgba(255,77,19,.72);opacity:0}.love-name{font-size:clamp(2.5rem,9vw,6.2rem);letter-spacing:.015em;color:#fff7cf}.love-name:before,.love-name:after{content:"✦";display:inline-block;margin:0 .25em;color:#ffd468;font-size:.46em;vertical-align:middle;filter:drop-shadow(0 0 10px #ff9d22)}.love-reveal{letter-spacing:-.055em}.cinematic.name-reveal .love-name{animation:nameReveal 1.15s cubic-bezier(.16,.84,.23,1) forwards}.cinematic.reveal .love-name{animation:nameFade .48s ease forwards}.cinematic.reveal .love-reveal{animation:loveReveal 1.2s .3s cubic-bezier(.16,.84,.23,1) forwards}.cinematic.fade{opacity:0}
 @keyframes fall{0%{transform:translate3d(-4vw,-20vh,var(--depth,0px)) rotate(-4deg) scale(.92);opacity:0}
 8%{opacity:.92}
 85%{opacity:.78}
@@ -88,8 +88,11 @@ to{opacity:1;transform:none}
 }
 @keyframes secretFloat{from{transform:translateY(-7px) rotate(-3deg)}to{transform:translateY(7px) rotate(3deg)}}
 @keyframes discoveryFlash{0%{opacity:0}20%{opacity:.95}100%{opacity:0}}
-@keyframes heartGather{0%{transform:translate(var(--sx),var(--sy)) scale(.55) rotate(-15deg);opacity:0}15%{opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(.78) rotate(0);opacity:1}}
+@keyframes heartGather{0%{transform:translate(var(--sx),var(--sy)) scale(.3) rotate(-18deg);opacity:0}14%{opacity:1}72%{transform:translate(var(--tx),var(--ty)) scale(var(--heart-scale-pop)) rotate(4deg);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(var(--heart-scale)) rotate(0);opacity:1}}
+@keyframes heartGlow{from{filter:brightness(.88)}to{filter:brightness(1.2) drop-shadow(0 0 8px rgba(255,211,91,.85))}}
 @keyframes loveReveal{0%{opacity:0;transform:translate(-50%,155px) scale(.55);filter:blur(12px)}60%{opacity:1;transform:translate(-50%,137px) scale(1.06);filter:blur(0)}100%{opacity:1;transform:translate(-50%,135px) scale(1);filter:blur(0)}}
+@keyframes nameReveal{0%{opacity:0;transform:translate(-50%,155px) scale(.5);filter:blur(14px)}65%{opacity:1;transform:translate(-50%,133px) scale(1.07);filter:blur(0)}100%{opacity:1;transform:translate(-50%,135px) scale(1);filter:blur(0)}}
+@keyframes nameFade{from{opacity:1;transform:translate(-50%,135px) scale(1)}to{opacity:0;transform:translate(-50%,118px) scale(1.18);filter:blur(8px)}}
 @keyframes moonPulse{from{transform:scale(.96)}to{transform:scale(1.06)}}
 @media(max-width:650px){.stage{inset:-11%;transform:scale(1.12) rotateX(0deg) rotateY(0deg)}
 .backdrop{background-position:center}
@@ -107,9 +110,9 @@ to{opacity:1;transform:none}
 
 </style>
 </head><body>
-<main class="stage" id="stage"><div class="backdrop"></div><div class="mist"></div><div class="lantern-glints"><i class="glint"></i><i class="glint"></i><i class="glint"></i><i class="glint"></i></div><div class="glow a"></div><div class="glow b"></div><canvas id="sparks"></canvas><div class="wishes" id="wishes"></div><div class="secret-lanterns" id="secretLanterns"><button class="secret-lantern" aria-label="Đèn bí mật 1"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 2"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 3"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 4"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 5"><span class="lantern-body" aria-hidden="true"></span></button></div><div class="sky-lanterns" id="skyLanterns"></div><section class="lyrics"><h2 id="lyric"></h2></section></main><canvas id="trail"></canvas><div class="cinematic" id="cinematic" aria-hidden="true"><div class="heart-flight" id="heartFlight"></div><div class="love-reveal">ANH THÍCH EM</div></div>
-<section id="start"><div class="intro"><p class="eyebrow">Gửi tới người đặc biệt</p><h1>Trung Thu<br>vui vẻ</h1><p>Có 5 chiếc đèn đang giấu một lời nhắn…</p><button class="start-btn" id="startBtn">Bắt đầu tìm 💛</button></div><div class="countdown" id="countdown" aria-live="assertive"><span class="count-number" id="countNumber">3</span></div></section><button class="motion" id="motion" aria-label="Bật xoay theo chuyển động điện thoại" title="Xoay theo điện thoại">◇</button><button class="sound" id="sound" aria-label="Bật hoặc tắt nhạc">♫</button><div class="quest" id="quest"><span>Tìm đèn bí mật</span><b id="questCount">0/5</b></div><div id="progress"><div id="bar"></div></div><audio id="music" src="music.mp3" preload="auto" loop></audio>
-<p class="hint" id="hint">Xoay khung cảnh và chạm vào 5 chiếc đèn phát sáng 🏮</p><aside class="final-card" id="finalCard" aria-live="polite"><button class="moon" id="secretMoon" aria-label="Giữ mặt trăng để mở lời nhắn bí mật">🌕</button><h2 id="cardTitle">Anh thích em 💛</h2><p id="cardText">Anh không biết sau này chúng ta sẽ thế nào,<br>nhưng hiện tại anh thật sự muốn được hiểu em nhiều hơn.<br><strong>Nếu em đồng ý, Trung Thu này đi cùng anh nhé?</strong></p><p class="easter-egg" id="easterEgg">Thật ra anh đã thích em lâu hơn em nghĩ đó.</p><div class="final-actions"><button class="yes-card" id="yesCard">Đồng ý 🥮</button></div></aside>
+<main class="stage" id="stage"><div class="backdrop"></div><div class="mist"></div><div class="lantern-glints"><i class="glint"></i><i class="glint"></i><i class="glint"></i><i class="glint"></i></div><div class="glow a"></div><div class="glow b"></div><canvas id="sparks"></canvas><div class="wishes" id="wishes"></div><div class="secret-lanterns" id="secretLanterns"><button class="secret-lantern" aria-label="Đèn bí mật 1"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 2"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 3"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 4"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 5"><span class="lantern-body" aria-hidden="true"></span></button></div><div class="sky-lanterns" id="skyLanterns"></div><section class="lyrics"><h2 id="lyric"></h2></section></main><canvas id="trail"></canvas><div class="cinematic" id="cinematic" aria-hidden="true"><div class="heart-flight" id="heartFlight"></div><div class="love-name">Công Chúa</div><div class="love-reveal">ANH THÍCH EM</div></div>
+<section id="start"><div class="intro"><p class="eyebrow">Gửi tới Công Chúa</p><h1>Trung Thu<br>vui vẻ</h1><p>Có 5 chiếc đèn đang giấu một lời nhắn…</p><button class="start-btn" id="startBtn">Bắt đầu tìm 💛</button></div><div class="countdown" id="countdown" aria-live="assertive"><span class="count-number" id="countNumber">3</span></div></section><button class="motion" id="motion" aria-label="Bật xoay theo chuyển động điện thoại" title="Xoay theo điện thoại">◇</button><button class="sound" id="sound" aria-label="Bật hoặc tắt nhạc">♫</button><div class="quest" id="quest"><span>Tìm đèn bí mật</span><b id="questCount">0/5</b></div><div id="progress"><div id="bar"></div></div><audio id="music" src="music.mp3" preload="auto" loop></audio>
+<p class="hint" id="hint">Xoay khung cảnh và chạm vào 5 chiếc đèn phát sáng 🏮</p><aside class="final-card" id="finalCard" aria-live="polite"><button class="moon" id="secretMoon" aria-label="Giữ mặt trăng để mở lời nhắn bí mật">🌕</button><h2 id="cardTitle">Anh thích Công Chúa 💛</h2><p id="cardText">Công Chúa à, anh không biết sau này chúng ta sẽ thế nào,<br>nhưng hiện tại anh thật sự muốn được hiểu em nhiều hơn.<br><strong>Nếu em đồng ý, Trung Thu này đi cùng anh nhé?</strong></p><p class="easter-egg" id="easterEgg">Thật ra anh đã thích em lâu hơn em nghĩ đó, Công Chúa à.</p><div class="final-actions"><button class="yes-card" id="yesCard">Đồng ý 🥮</button></div></aside>
 <script>
 
 const cues=[{start:0,end:3,text:'Cứ yêu đi, đừng bận tâm chi ngày sau.'}
@@ -165,10 +168,11 @@ else{audio.pause();cancelAnimationFrame(raf);sound.textContent='×'}
 ;yesCard.onclick=e=>{
   e.stopPropagation();
   finalCard.classList.add('accepted');
-  cardTitle.textContent='Hẹn rồi nhé! 💛';
+  cardTitle.textContent='Hẹn rồi nhé, Công Chúa! 💛';
   cardText.innerHTML='Vậy từ hôm nay,<br><strong>cho anh được quan tâm em nhiều hơn nhé 🏮</strong>';
   yesCard.style.display='none';
   lyric.textContent='Vậy là Trung Thu này có đôi rồi ✦';
+  if(navigator.vibrate)navigator.vibrate([70,45,120]);
   for(let i=0;i<16;i++)setTimeout(()=>{
     releaseLantern(innerWidth*(.12+Math.random()*.76),innerHeight*(.72+Math.random()*.2));
     addTrail(innerWidth*Math.random(),innerHeight*(.2+Math.random()*.55));
@@ -194,35 +198,48 @@ function startCinematic(){
   stage.classList.add('cinematic-mode');
   fadeMusic(.28,1100);
   const buttons=[...document.querySelectorAll('.secret-lantern')];
-  const scale=Math.min(1,innerWidth/440);
-  const targets=[[-72,-58],[72,-58],[-112,5],[112,5],[0,92]];
+  const lampCount=innerWidth<500?24:30;
+  const radiusX=Math.min(innerWidth*.34,230);
+  const radiusY=Math.min(innerHeight*.24,180);
+  const centerX=innerWidth/2-35;
+  const centerY=innerHeight/2-136;
+  const heartScale=innerWidth<500?.4:.52;
   heartFlight.innerHTML='';
-  buttons.forEach((button,i)=>{
+  for(let i=0;i<lampCount;i++){
+    const button=buttons[i%buttons.length];
     const rect=button.getBoundingClientRect(),lamp=document.createElement('span');
+    const angle=Math.PI*2*i/lampCount;
+    const sin=Math.sin(angle),cos=Math.cos(angle);
+    const targetX=centerX+radiusX*Math.pow(sin,3);
+    const targetY=centerY-radiusY*(13*cos-5*Math.cos(2*angle)-2*Math.cos(3*angle)-Math.cos(4*angle))/17;
     lamp.className='heart-lantern';
     lamp.innerHTML='<span class="lantern-body" aria-hidden="true"></span>';
     lamp.style.setProperty('--sx',(rect.left+rect.width/2-35)+'px');
     lamp.style.setProperty('--sy',(rect.top+rect.height/2-46)+'px');
-    lamp.style.setProperty('--tx',(innerWidth/2-35+targets[i][0]*scale)+'px');
-    lamp.style.setProperty('--ty',(innerHeight/2-70+targets[i][1]*scale)+'px');
-    lamp.style.animationDelay=(i*.08)+'s';
+    lamp.style.setProperty('--tx',targetX+'px');
+    lamp.style.setProperty('--ty',targetY+'px');
+    lamp.style.setProperty('--heart-scale',heartScale);
+    lamp.style.setProperty('--heart-scale-pop',heartScale*1.15);
+    lamp.style.setProperty('--delay',(i*.025)+'s');
     heartFlight.appendChild(lamp);
-  });
-  cinematic.classList.remove('fade','reveal');
+  }
+  cinematic.classList.remove('fade','reveal','name-reveal');
   cinematic.classList.add('show');
   cinematic.setAttribute('aria-hidden','false');
-  setTimeout(()=>cinematic.classList.add('reveal'),2200);
-  setTimeout(()=>cinematic.classList.add('fade'),4550);
+  setTimeout(()=>cinematic.classList.add('name-reveal'),3150);
+  setTimeout(()=>cinematic.classList.add('reveal'),4550);
+  setTimeout(()=>{if(navigator.vibrate)navigator.vibrate([55,40,90])},4850);
+  setTimeout(()=>cinematic.classList.add('fade'),6650);
   setTimeout(()=>{
     finalCard.classList.add('show');
     stage.classList.remove('cinematic-mode');
     fadeMusic(.6,1000);
-  },5050);
+  },7150);
   setTimeout(()=>{
-    cinematic.classList.remove('show','fade','reveal');
+    cinematic.classList.remove('show','fade','reveal','name-reveal');
     cinematic.setAttribute('aria-hidden','true');
     heartFlight.innerHTML='';
-  },5900);
+  },8000);
 }
 
 let moonTimer;
@@ -258,6 +275,7 @@ document.querySelectorAll('.secret-lantern').forEach(button=>{
     stage.classList.add('discovery-flash');
     setTimeout(()=>stage.classList.remove('discovery-flash'),720);
     foundLanterns+=1;
+    if(navigator.vibrate)navigator.vibrate(32);
     questCount.textContent=`${foundLanterns}/5`;
     revealMessage(clueTexts[foundLanterns-1]);
     releaseLantern(rect.left+rect.width/2,rect.top+rect.height/2);
