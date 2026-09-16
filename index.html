@@ -51,13 +51,13 @@ button{font:inherit}
 .start-btn:active{transform:scale(.97)}
 .sound,.motion{position:fixed;z-index:10;top:max(17px,env(safe-area-inset-top));width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,238,184,.45);background:rgba(3,12,31,.48);color:#ffe596;backdrop-filter:blur(10px);display:none;place-items:center;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,.25)}
 .sound{right:17px}.motion{left:17px}.motion.active{color:#2b1600;background:linear-gradient(180deg,#fff2b9,#e9a43a);box-shadow:0 0 25px rgba(255,177,54,.58)}
-.final-card{position:fixed;z-index:15;left:50%;top:50%;width:min(90vw,620px);padding:clamp(28px,6vw,52px);border:1px solid rgba(255,234,167,.48);border-radius:32px;text-align:center;background:radial-gradient(circle at top,rgba(126,54,10,.54),rgba(3,12,31,.86));box-shadow:0 24px 100px rgba(0,0,0,.68),0 0 55px rgba(255,157,44,.2);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transform:translate(-50%,-45%) scale(.88);transition:opacity .8s,transform .9s cubic-bezier(.16,.84,.23,1)}
-.final-card.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.final-card{position:fixed;z-index:15;left:50%;top:50%;width:min(90vw,620px);max-height:92dvh;overflow-y:auto;padding:clamp(28px,6vw,52px);border:1px solid rgba(255,234,167,.48);border-radius:32px;text-align:center;background:radial-gradient(circle at top,rgba(126,54,10,.54),rgba(3,12,31,.86));box-shadow:0 24px 100px rgba(0,0,0,.68),0 0 55px rgba(255,157,44,.2);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transform:translate(-50%,-45%) scale(.88);transition:opacity .8s,transform .9s cubic-bezier(.16,.84,.23,1)}
+.final-card.show{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}.final-card.portal-out{opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.12) rotate(8deg);filter:blur(12px)}.final-card.ticket-mode .moon,.final-card.ticket-mode #cardText,.final-card.ticket-mode .easter-egg{display:none}.final-card.ticket-mode h2{margin-top:0}
 .final-card .moon{border:0;background:transparent;padding:0;font-size:clamp(3rem,8vw,5.5rem);filter:drop-shadow(0 0 22px rgba(255,220,125,.72));cursor:pointer;animation:moonPulse 2.5s ease-in-out infinite alternate}
-.final-card h2{margin:8px 0 14px;font:800 clamp(2rem,6vw,4rem)/1.15 "Playpen Sans","Be Vietnam Pro",cursive;color:#fff1b8}
+.final-card h2{margin:8px 0 14px;font:800 clamp(2rem,6vw,4rem)/1.15 "Playpen Sans","Be Vietnam Pro",cursive;color:#fff1b8}.princess-name{display:inline;border:0;padding:0;background:transparent;color:inherit;font:inherit;cursor:pointer;text-shadow:inherit}
 .final-card p{margin:0;color:#fff8dd;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.75}
 .final-card strong{color:#ffe283;font-size:1.08em}.easter-egg{max-height:0;overflow:hidden!important;margin:0!important;color:#ffd978!important;font-size:.9rem!important;opacity:0;transition:max-height .7s,opacity .7s,margin .7s!important}.easter-egg.show{max-height:80px;margin-top:15px!important;opacity:1}.final-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}.yes-card{border:1px solid rgba(255,233,166,.8);border-radius:999px;padding:13px 24px;font-weight:800;cursor:pointer;background:linear-gradient(180deg,#fff2b9,#e9a43a);color:#421d00;box-shadow:0 8px 28px rgba(255,164,35,.38);transition:transform .2s,box-shadow .2s}.yes-card:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(255,164,35,.55)}.final-card.accepted{box-shadow:0 24px 100px rgba(0,0,0,.68),0 0 95px rgba(255,189,58,.5)}
-.cinematic{position:fixed;z-index:14;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(86,29,8,.16),rgba(0,3,13,.88));opacity:0;pointer-events:none;transition:opacity 1s}.cinematic.show{opacity:1}.heart-flight{position:absolute;inset:0}.heart-lantern{position:absolute;left:0;top:0;width:70px;height:92px;transform:translate(var(--sx),var(--sy)) scale(.5);opacity:0;filter:drop-shadow(0 0 14px #ff7c20);will-change:transform,opacity}.heart-lantern .lantern-body{animation:heartGlow 1.15s ease-in-out infinite alternate}.cinematic.show .heart-lantern{animation:heartGather 2.45s cubic-bezier(.2,.75,.15,1) var(--delay,0s) forwards}.love-name,.love-reveal{position:absolute;left:50%;top:50%;width:100%;transform:translate(-50%,135px) scale(.82);text-align:center;font:800 clamp(2.7rem,10vw,7rem)/1 "Playpen Sans","Be Vietnam Pro",cursive;color:#fff1b0;text-shadow:0 3px 0 #8a370d,0 0 26px #ffb332,0 0 80px rgba(255,77,19,.72);opacity:0}.love-name{font-size:clamp(2.5rem,9vw,6.2rem);letter-spacing:.015em;color:#fff7cf}.love-name:before,.love-name:after{content:"✦";display:inline-block;margin:0 .25em;color:#ffd468;font-size:.46em;vertical-align:middle;filter:drop-shadow(0 0 10px #ff9d22)}.love-reveal{letter-spacing:-.055em}.cinematic.name-reveal .love-name{animation:nameReveal 1.15s cubic-bezier(.16,.84,.23,1) forwards}.cinematic.reveal .love-name{animation:nameFade .48s ease forwards}.cinematic.reveal .love-reveal{animation:loveReveal 1.2s .3s cubic-bezier(.16,.84,.23,1) forwards}.cinematic.fade{opacity:0}
+.cinematic{position:fixed;z-index:14;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(86,29,8,.16),rgba(0,3,13,.88));opacity:0;pointer-events:none;transition:opacity 1s}.cinematic.show{opacity:1}.cinematic:after{content:"";position:absolute;z-index:5;inset:0;background:#fff2ad;opacity:0;pointer-events:none}.cinematic.fly-through:after{animation:flightFlash 1.25s ease-in-out}.heart-flight{position:absolute;inset:0;transform-origin:50% 45%;will-change:transform,filter,opacity}.heart-lantern{position:absolute;left:0;top:0;width:70px;height:92px;transform:translate(var(--sx),var(--sy)) scale(.5);opacity:0;filter:drop-shadow(0 0 14px #ff7c20);will-change:transform,opacity;transition:opacity .32s,filter .32s}.heart-lantern .lantern-body{animation:heartGlow 1.15s ease-in-out infinite alternate}.cinematic.show .heart-lantern{animation:heartGather 2.45s cubic-bezier(.2,.75,.15,1) var(--delay,0s) forwards}.cinematic.heartbeat .heart-flight{animation:heartBeat3 2.15s ease-in-out both}.cinematic.fly-through .heart-flight{animation:heartFlyThrough 1.25s cubic-bezier(.72,.02,.18,1) forwards}.cinematic.blackout .heart-lantern{opacity:0!important;filter:brightness(0)}#nameParticles{position:absolute;z-index:1;inset:0;width:100%;height:100%;pointer-events:none}.love-name,.love-reveal{position:absolute;z-index:2;left:50%;top:50%;width:100%;transform:translate(-50%,135px) scale(.82);text-align:center;font:800 clamp(2.7rem,10vw,7rem)/1 "Playpen Sans","Be Vietnam Pro",cursive;color:#fff1b0;text-shadow:0 3px 0 #8a370d,0 0 26px #ffb332,0 0 80px rgba(255,77,19,.72);opacity:0}.love-name{font-size:clamp(2.5rem,9vw,6.2rem);letter-spacing:.015em;color:transparent;background:linear-gradient(90deg,#9a5d12,#fff8c9,#ffc955,#fff8c9,#9a5d12);background-size:250% auto;background-clip:text;-webkit-background-clip:text;filter:drop-shadow(0 0 16px #ffad27)}.love-name:before,.love-name:after{content:"✦";display:inline-block;margin:0 .25em;color:#ffd468;font-size:.46em;vertical-align:middle;filter:drop-shadow(0 0 10px #ff9d22)}.love-reveal{letter-spacing:-.055em}.cinematic.name-reveal .love-name{animation:nameReveal .7s .82s cubic-bezier(.16,.84,.23,1) both,starWrite 1.5s .82s linear infinite}.cinematic.reveal .love-name{animation:nameFade .48s ease forwards}.cinematic.reveal .love-reveal{animation:loveReveal 1.2s .3s cubic-bezier(.16,.84,.23,1) forwards}.cinematic.fade{opacity:0}.letter-lantern{position:absolute;z-index:3;left:50%;top:50%;width:90px;height:118px;opacity:0;transform:translate(-50%,-50%) scale(.25);filter:drop-shadow(0 0 28px #ff8d24);transition:none}.letter-lantern .lantern-body{left:14px;top:16px;width:62px;height:76px}.cinematic.letter-flight .letter-lantern{animation:letterArrive 1.6s cubic-bezier(.16,.84,.23,1) forwards}.moon-portal{position:fixed;z-index:30;inset:0;display:grid;place-items:center;overflow:hidden;background:rgba(0,3,14,0);opacity:0;pointer-events:none;transition:opacity .45s,background .8s}.moon-portal.show{opacity:1;background:rgba(0,3,14,.82)}.portal-core{position:absolute;width:120px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fffde3,#ffe69b 38%,#ff9c2c 67%,rgba(255,119,20,.1) 72%,transparent 74%);box-shadow:0 0 35px #fff1a9,0 0 100px #ff9b2d,0 0 220px rgba(255,91,19,.7);transform:scale(.08);opacity:0}.moon-portal.show .portal-core{animation:portalOpen 2.45s cubic-bezier(.65,.02,.22,1) both}.portal-ring{position:absolute;width:170px;aspect-ratio:1;border:2px solid rgba(255,235,159,.75);border-radius:50%;box-shadow:0 0 24px #ffbc48,inset 0 0 24px #ffbc48;opacity:0}.moon-portal.show .portal-ring{animation:portalRing 1.65s .25s ease-out both}.moon-portal.show .portal-ring.r2{animation-delay:.5s}.ticket{display:none;margin:18px auto 0;padding:22px 18px;border:1px dashed rgba(255,223,136,.8);border-radius:20px;background:linear-gradient(135deg,rgba(255,237,177,.16),rgba(195,94,21,.12));box-shadow:inset 0 0 28px rgba(255,206,93,.09)}.ticket.show{display:block;animation:ticketOpen .8s cubic-bezier(.16,.84,.23,1) both}.ticket-kicker{margin:0 0 10px!important;color:#ffd978!important;font-size:.72rem!important;font-weight:800;letter-spacing:.2em;text-transform:uppercase}.ticket-name{margin:0!important;font:800 clamp(1.75rem,5vw,2.8rem)/1.1 "Playpen Sans","Be Vietnam Pro",cursive!important;color:#fff1b8!important}.ticket-meta{margin:12px 0 0!important;font-size:.9rem!important;line-height:1.65!important}.save-ticket{display:none;margin:13px auto 0;border:1px solid rgba(255,233,166,.7);border-radius:999px;padding:10px 17px;background:rgba(255,244,201,.1);color:#ffe69b;font-weight:800;cursor:pointer}.save-ticket.show{display:block}
 @keyframes fall{0%{transform:translate3d(-4vw,-20vh,var(--depth,0px)) rotate(-4deg) scale(.92);opacity:0}
 8%{opacity:.92}
 85%{opacity:.78}
@@ -90,6 +90,14 @@ to{opacity:1;transform:none}
 @keyframes discoveryFlash{0%{opacity:0}20%{opacity:.95}100%{opacity:0}}
 @keyframes heartGather{0%{transform:translate(var(--sx),var(--sy)) scale(.3) rotate(-18deg);opacity:0}14%{opacity:1}72%{transform:translate(var(--tx),var(--ty)) scale(var(--heart-scale-pop)) rotate(4deg);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(var(--heart-scale)) rotate(0);opacity:1}}
 @keyframes heartGlow{from{filter:brightness(.88)}to{filter:brightness(1.2) drop-shadow(0 0 8px rgba(255,211,91,.85))}}
+@keyframes heartBeat3{0%,100%{transform:scale(1)}10%,38%,66%{transform:scale(1.1)}22%,50%,78%{transform:scale(.96)}}
+@keyframes heartFlyThrough{0%{transform:scale(1);filter:blur(0);opacity:1}55%{opacity:1}100%{transform:scale(9);filter:blur(10px);opacity:0}}
+@keyframes flightFlash{0%,55%,100%{opacity:0}78%{opacity:.85}}
+@keyframes starWrite{to{background-position:250% center}}
+@keyframes letterArrive{0%{opacity:0;transform:translate(-50%,-72%) scale(.18) rotate(-12deg)}45%{opacity:1;transform:translate(-50%,-58%) scale(1.22) rotate(4deg)}100%{opacity:1;transform:translate(-50%,-52%) scale(.92) rotate(0)}}
+@keyframes portalOpen{0%{opacity:0;transform:scale(.08) rotate(0)}22%{opacity:1}72%{opacity:1;transform:scale(2.6) rotate(90deg)}100%{opacity:0;transform:scale(18) rotate(180deg)}}
+@keyframes portalRing{0%{opacity:0;transform:scale(.25)}25%{opacity:1}100%{opacity:0;transform:scale(7)}}
+@keyframes ticketOpen{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes loveReveal{0%{opacity:0;transform:translate(-50%,155px) scale(.55);filter:blur(12px)}60%{opacity:1;transform:translate(-50%,137px) scale(1.06);filter:blur(0)}100%{opacity:1;transform:translate(-50%,135px) scale(1);filter:blur(0)}}
 @keyframes nameReveal{0%{opacity:0;transform:translate(-50%,155px) scale(.5);filter:blur(14px)}65%{opacity:1;transform:translate(-50%,133px) scale(1.07);filter:blur(0)}100%{opacity:1;transform:translate(-50%,135px) scale(1);filter:blur(0)}}
 @keyframes nameFade{from{opacity:1;transform:translate(-50%,135px) scale(1)}to{opacity:0;transform:translate(-50%,118px) scale(1.18);filter:blur(8px)}}
@@ -110,9 +118,9 @@ to{opacity:1;transform:none}
 
 </style>
 </head><body>
-<main class="stage" id="stage"><div class="backdrop"></div><div class="mist"></div><div class="lantern-glints"><i class="glint"></i><i class="glint"></i><i class="glint"></i><i class="glint"></i></div><div class="glow a"></div><div class="glow b"></div><canvas id="sparks"></canvas><div class="wishes" id="wishes"></div><div class="secret-lanterns" id="secretLanterns"><button class="secret-lantern" aria-label="Đèn bí mật 1"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 2"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 3"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 4"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 5"><span class="lantern-body" aria-hidden="true"></span></button></div><div class="sky-lanterns" id="skyLanterns"></div><section class="lyrics"><h2 id="lyric"></h2></section></main><canvas id="trail"></canvas><div class="cinematic" id="cinematic" aria-hidden="true"><div class="heart-flight" id="heartFlight"></div><div class="love-name">Công Chúa</div><div class="love-reveal">ANH THÍCH EM</div></div>
+<main class="stage" id="stage"><div class="backdrop"></div><div class="mist"></div><div class="lantern-glints"><i class="glint"></i><i class="glint"></i><i class="glint"></i><i class="glint"></i></div><div class="glow a"></div><div class="glow b"></div><canvas id="sparks"></canvas><div class="wishes" id="wishes"></div><div class="secret-lanterns" id="secretLanterns"><button class="secret-lantern" aria-label="Đèn bí mật 1"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 2"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 3"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 4"><span class="lantern-body" aria-hidden="true"></span></button><button class="secret-lantern" aria-label="Đèn bí mật 5"><span class="lantern-body" aria-hidden="true"></span></button></div><div class="sky-lanterns" id="skyLanterns"></div><section class="lyrics"><h2 id="lyric"></h2></section></main><canvas id="trail"></canvas><div class="cinematic" id="cinematic" aria-hidden="true"><div class="heart-flight" id="heartFlight"></div><canvas id="nameParticles" aria-hidden="true"></canvas><div class="love-name">CÔNG CHÚA</div><div class="love-reveal">ANH THÍCH EM</div><div class="letter-lantern" aria-hidden="true"><span class="lantern-body"></span></div></div>
 <section id="start"><div class="intro"><p class="eyebrow">Gửi tới Công Chúa</p><h1>Trung Thu<br>vui vẻ</h1><p>Có 5 chiếc đèn đang giấu một lời nhắn…</p><button class="start-btn" id="startBtn">Bắt đầu tìm 💛</button></div><div class="countdown" id="countdown" aria-live="assertive"><span class="count-number" id="countNumber">3</span></div></section><button class="motion" id="motion" aria-label="Bật xoay theo chuyển động điện thoại" title="Xoay theo điện thoại">◇</button><button class="sound" id="sound" aria-label="Bật hoặc tắt nhạc">♫</button><div class="quest" id="quest"><span>Tìm đèn bí mật</span><b id="questCount">0/5</b></div><div id="progress"><div id="bar"></div></div><audio id="music" src="music.mp3" preload="auto" loop></audio>
-<p class="hint" id="hint">Xoay khung cảnh và chạm vào 5 chiếc đèn phát sáng 🏮</p><aside class="final-card" id="finalCard" aria-live="polite"><button class="moon" id="secretMoon" aria-label="Giữ mặt trăng để mở lời nhắn bí mật">🌕</button><h2 id="cardTitle">Anh thích Công Chúa 💛</h2><p id="cardText">Công Chúa à, anh không biết sau này chúng ta sẽ thế nào,<br>nhưng hiện tại anh thật sự muốn được hiểu em nhiều hơn.<br><strong>Nếu em đồng ý, Trung Thu này đi cùng anh nhé?</strong></p><p class="easter-egg" id="easterEgg">Thật ra anh đã thích em lâu hơn em nghĩ đó, Công Chúa à.</p><div class="final-actions"><button class="yes-card" id="yesCard">Đồng ý 🥮</button></div></aside>
+<p class="hint" id="hint">Xoay khung cảnh và chạm vào 5 chiếc đèn phát sáng 🏮</p><aside class="final-card" id="finalCard" aria-live="polite"><button class="moon" id="secretMoon" aria-label="Giữ mặt trăng để mở lời nhắn bí mật">🌕</button><h2 id="cardTitle">Anh thích <button class="princess-name" id="princessName" aria-label="Công Chúa">Công Chúa</button> 💛</h2><p id="cardText">Công Chúa à, anh không biết sau này chúng ta sẽ thế nào,<br>nhưng hiện tại anh thật sự muốn được hiểu em nhiều hơn.<br><strong>Nếu em đồng ý, Trung Thu này đi cùng anh nhé?</strong></p><p class="easter-egg" id="easterEgg">Thật ra anh đã thích em lâu hơn em nghĩ đó, Công Chúa à.</p><div class="final-actions"><button class="yes-card" id="yesCard">Đồng ý 🥮</button></div><section class="ticket" id="ticket"><p class="ticket-kicker">Vé hẹn hò dưới ánh trăng</p><p class="ticket-name">Dành cho Công Chúa 💛</p><p class="ticket-meta">Người mời: Anh<br>Trạng thái: <strong>Đã có hẹn</strong><br>Giá vé: Một nụ cười của em</p></section><button class="save-ticket" id="saveTicket">Lưu tấm vé ✦</button></aside><div class="moon-portal" id="moonPortal" aria-hidden="true"><i class="portal-ring"></i><i class="portal-ring r2"></i><i class="portal-core"></i></div>
 <script>
 
 const cues=[{start:0,end:3,text:'Cứ yêu đi, đừng bận tâm chi ngày sau.'}
@@ -123,7 +131,7 @@ const cues=[{start:0,end:3,text:'Cứ yêu đi, đừng bận tâm chi ngày sau
 ];
 const wishes=document.querySelector('#wishes');for(let i=0;i<34;i++){const e=document.createElement('span'),depth=-55+Math.random()*165,near=(depth+55)/165;e.className='wish';e.textContent=Math.random()>.35?'✦':'·';e.style.left=(-3+Math.random()*98)+'%';e.style.fontSize=(8+near*16)+'px';e.style.animationDuration=(7.4-near*3.4)+'s';e.style.animationDelay=(-Math.random()*8)+'s';e.style.opacity=(.32+near*.48).toFixed(2);e.style.setProperty('--depth',depth.toFixed(0)+'px');wishes.appendChild(e)}
 
-const audio=document.querySelector('#music'),lyric=document.querySelector('#lyric'),bar=document.querySelector('#bar'),progress=document.querySelector('#progress'),sound=document.querySelector('#sound'),motion=document.querySelector('#motion'),start=document.querySelector('#start'),hint=document.querySelector('#hint'),quest=document.querySelector('#quest'),questCount=document.querySelector('#questCount'),cinematic=document.querySelector('#cinematic'),heartFlight=document.querySelector('#heartFlight'),finalCard=document.querySelector('#finalCard'),cardTitle=document.querySelector('#cardTitle'),cardText=document.querySelector('#cardText'),secretMoon=document.querySelector('#secretMoon'),easterEgg=document.querySelector('#easterEgg'),yesCard=document.querySelector('#yesCard'),skyLanterns=document.querySelector('#skyLanterns');let current=-1,raf,started=false;
+const audio=document.querySelector('#music'),lyric=document.querySelector('#lyric'),bar=document.querySelector('#bar'),progress=document.querySelector('#progress'),sound=document.querySelector('#sound'),motion=document.querySelector('#motion'),start=document.querySelector('#start'),hint=document.querySelector('#hint'),quest=document.querySelector('#quest'),questCount=document.querySelector('#questCount'),cinematic=document.querySelector('#cinematic'),heartFlight=document.querySelector('#heartFlight'),nameParticles=document.querySelector('#nameParticles'),moonPortal=document.querySelector('#moonPortal'),finalCard=document.querySelector('#finalCard'),cardTitle=document.querySelector('#cardTitle'),cardText=document.querySelector('#cardText'),secretMoon=document.querySelector('#secretMoon'),easterEgg=document.querySelector('#easterEgg'),yesCard=document.querySelector('#yesCard'),ticket=document.querySelector('#ticket'),saveTicket=document.querySelector('#saveTicket'),princessName=document.querySelector('#princessName'),skyLanterns=document.querySelector('#skyLanterns');let current=-1,raf,started=false;
 function showCue(i){if(i===current)return;current=i;lyric.classList.remove('show');setTimeout(()=>{lyric.textContent=cues[i]?.text||'Trung Thu vui vẻ ✦';lyric.classList.add('show')}
 ,150)}
 function sync(){const t=audio.currentTime;bar.style.width=Math.min(100,t/audio.duration*100)+'%';if(!audio.paused)raf=requestAnimationFrame(sync)}
@@ -165,20 +173,61 @@ startBtn.onclick=async()=>{
 ;sound.onclick=e=>{e.stopPropagation();if(audio.paused){audio.play();sync();sound.textContent='♫'}
 else{audio.pause();cancelAnimationFrame(raf);sound.textContent='×'}
 }
-;yesCard.onclick=e=>{
+;yesCard.onclick=async e=>{
   e.stopPropagation();
-  finalCard.classList.add('accepted');
-  cardTitle.textContent='Hẹn rồi nhé, Công Chúa! 💛';
-  cardText.innerHTML='Vậy từ hôm nay,<br><strong>cho anh được quan tâm em nhiều hơn nhé 🏮</strong>';
-  yesCard.style.display='none';
-  lyric.textContent='Vậy là Trung Thu này có đôi rồi ✦';
+  yesCard.disabled=true;
+  finalCard.classList.add('portal-out');
+  moonPortal.classList.add('show');
+  moonPortal.setAttribute('aria-hidden','false');
+  fadeMusic(.3,700);
   if(navigator.vibrate)navigator.vibrate([70,45,120]);
+  await wait(2250);
+  finalCard.classList.add('accepted','ticket-mode');
+  finalCard.classList.remove('portal-out');
+  cardTitle.innerHTML='Hẹn rồi nhé, Công Chúa! 💛';
+  cardText.innerHTML='Vậy từ hôm nay,<br><strong>cho anh được quan tâm em nhiều hơn nhé.</strong>';
+  yesCard.style.display='none';
+  ticket.classList.add('show');
+  saveTicket.classList.add('show');
+  lyric.textContent='Vậy là Trung Thu này có đôi rồi ✦';
+  moonPortal.classList.remove('show');
+  moonPortal.setAttribute('aria-hidden','true');
+  fadeMusic(.68,900);
   for(let i=0;i<16;i++)setTimeout(()=>{
     releaseLantern(innerWidth*(.12+Math.random()*.76),innerHeight*(.72+Math.random()*.2));
     addTrail(innerWidth*Math.random(),innerHeight*(.2+Math.random()*.55));
   },i*110);
 }
 ;
+let princessTaps=0,princessTapTimer;
+princessName.addEventListener('click',e=>{
+  e.stopPropagation();
+  princessTaps+=1;
+  clearTimeout(princessTapTimer);
+  if(princessTaps>=3){
+    easterEgg.textContent='Nếu em đọc được dòng này thì… anh thích em thật đó, không phải hiệu ứng đâu.';
+    easterEgg.classList.add('show');
+    princessTaps=0;
+    if(navigator.vibrate)navigator.vibrate([40,35,70]);
+  }else princessTapTimer=setTimeout(()=>princessTaps=0,900);
+});
+
+saveTicket.addEventListener('click',e=>{
+  e.stopPropagation();
+  const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d'),scale=2;
+  canvas.width=900*scale;canvas.height=1200*scale;ctx.scale(scale,scale);
+  const bg=ctx.createLinearGradient(0,0,900,1200);bg.addColorStop(0,'#071b39');bg.addColorStop(.55,'#2c1830');bg.addColorStop(1,'#6d2815');ctx.fillStyle=bg;ctx.fillRect(0,0,900,1200);
+  const moon=ctx.createRadialGradient(670,220,20,670,220,145);moon.addColorStop(0,'#fffbdc');moon.addColorStop(.45,'#ffe398');moon.addColorStop(1,'rgba(255,185,67,0)');ctx.fillStyle=moon;ctx.beginPath();ctx.arc(670,220,145,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='rgba(255,226,145,.78)';ctx.lineWidth=3;ctx.setLineDash([12,10]);ctx.roundRect(75,105,750,990,30);ctx.stroke();ctx.setLineDash([]);
+  ctx.textAlign='center';ctx.fillStyle='#ffd978';ctx.font='700 27px sans-serif';ctx.fillText('VÉ HẸN HÒ DƯỚI ÁNH TRĂNG',450,245);
+  ctx.fillStyle='#fff3bd';ctx.font='800 62px sans-serif';ctx.fillText('CÔNG CHÚA',450,390);
+  ctx.fillStyle='#fff8dd';ctx.font='600 31px sans-serif';ctx.fillText('Người đi cùng: Công Chúa 💛',450,520);ctx.fillText('Người mời: Anh',450,580);
+  ctx.fillStyle='#ffd978';ctx.font='800 35px sans-serif';ctx.fillText('TRẠNG THÁI: ĐÃ CÓ HẸN',450,700);
+  ctx.fillStyle='#fff8dd';ctx.font='500 28px sans-serif';ctx.fillText('Giá vé: Một nụ cười của em',450,790);
+  ctx.font='46px serif';ctx.fillText('🏮   ✦   🥮   ✦   🏮',450,910);
+  ctx.fillStyle='rgba(255,244,208,.78)';ctx.font='500 24px sans-serif';ctx.fillText('Hẹn nhau dưới ánh trăng nhé.',450,1005);
+  const link=document.createElement('a');link.download='ve-hen-ho-cua-cong-chua.png';link.href=canvas.toDataURL('image/png');link.click();
+});
 function releaseLantern(x,y){const e=document.createElement('span');e.className='sky-lantern';e.textContent='🏮';e.style.left=x+'px';e.style.top=y+'px';e.style.setProperty('--drift',(Math.random()*140-70)+'px');skyLanterns.appendChild(e);setTimeout(()=>e.remove(),6000)}
 
 function fadeMusic(target,duration=1000){
@@ -189,6 +238,46 @@ function fadeMusic(target,duration=1000){
     if(p<1)requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
+}
+const nameCtx=nameParticles.getContext('2d');
+let nameParticleRaf=0;
+function startNameParticles(){
+  cancelAnimationFrame(nameParticleRaf);
+  const dpr=Math.min(devicePixelRatio||1,2),w=innerWidth,h=innerHeight;
+  nameParticles.width=w*dpr;nameParticles.height=h*dpr;
+  nameCtx.setTransform(dpr,0,0,dpr,0,0);
+  const mask=document.createElement('canvas'),mctx=mask.getContext('2d');
+  mask.width=w;mask.height=h;
+  const fontSize=Math.min(118,Math.max(48,w*.098));
+  mctx.fillStyle='#fff';mctx.textAlign='center';mctx.textBaseline='middle';
+  mctx.font=`800 ${fontSize}px "Playpen Sans",sans-serif`;
+  mctx.fillText('CÔNG CHÚA',w/2,h/2+165);
+  const pixels=mctx.getImageData(0,0,w,h).data,step=w<520?4:5,particles=[];
+  for(let y=Math.max(0,Math.floor(h/2+105));y<Math.min(h,Math.ceil(h/2+225));y+=step){
+    for(let x=0;x<w;x+=step){
+      if(pixels[(y*w+x)*4+3]<100||particles.length>1700)continue;
+      const side=Math.floor(Math.random()*4);let sx,sy;
+      if(side===0){sx=Math.random()*w;sy=-25}else if(side===1){sx=w+25;sy=Math.random()*h}else if(side===2){sx=Math.random()*w;sy=h+25}else{sx=-25;sy=Math.random()*h}
+      particles.push({sx,sy,tx:x,ty:y,r:.8+Math.random()*1.8,delay:Math.random()*.42,phase:Math.random()*6.28,hue:38+Math.random()*16});
+    }
+  }
+  const born=performance.now();
+  function drawName(now){
+    const elapsed=now-born;nameCtx.clearRect(0,0,w,h);nameCtx.globalCompositeOperation='lighter';nameCtx.shadowBlur=9;nameCtx.shadowColor='#ffad2d';
+    for(const p of particles){
+      const raw=Math.max(0,Math.min(1,(elapsed-p.delay*700)/1150)),ease=1-Math.pow(1-raw,4);
+      if(raw<=0)continue;
+      const fade=elapsed>2050?Math.max(0,1-(elapsed-2050)/420):1;
+      const x=p.sx+(p.tx-p.sx)*ease+Math.sin(elapsed*.012+p.phase)*(1-ease)*13;
+      const y=p.sy+(p.ty-p.sy)*ease+Math.cos(elapsed*.01+p.phase)*(1-ease)*11;
+      nameCtx.globalAlpha=Math.min(1,raw*2.4)*fade*(.72+Math.sin(elapsed*.018+p.phase)*.2);
+      nameCtx.fillStyle=`hsl(${p.hue} 100% 72%)`;
+      nameCtx.beginPath();nameCtx.arc(x,y,p.r*(.6+ease*.55),0,Math.PI*2);nameCtx.fill();
+    }
+    nameCtx.globalAlpha=1;nameCtx.shadowBlur=0;nameCtx.globalCompositeOperation='source-over';
+    if(elapsed<2500)nameParticleRaf=requestAnimationFrame(drawName);else nameCtx.clearRect(0,0,w,h);
+  }
+  nameParticleRaf=requestAnimationFrame(drawName);
 }
 function startCinematic(){
   if(cinematic.classList.contains('show'))return;
@@ -223,23 +312,29 @@ function startCinematic(){
     lamp.style.setProperty('--delay',(i*.025)+'s');
     heartFlight.appendChild(lamp);
   }
-  cinematic.classList.remove('fade','reveal','name-reveal');
+  cinematic.classList.remove('fade','reveal','name-reveal','heartbeat','fly-through','blackout','letter-flight');
   cinematic.classList.add('show');
   cinematic.setAttribute('aria-hidden','false');
-  setTimeout(()=>cinematic.classList.add('name-reveal'),3150);
-  setTimeout(()=>cinematic.classList.add('reveal'),4550);
-  setTimeout(()=>{if(navigator.vibrate)navigator.vibrate([55,40,90])},4850);
-  setTimeout(()=>cinematic.classList.add('fade'),6650);
+  setTimeout(()=>cinematic.classList.add('heartbeat'),2800);
+  setTimeout(()=>{if(navigator.vibrate)navigator.vibrate([45,150,45,150,85])},3150);
+  setTimeout(()=>cinematic.classList.add('fly-through'),4950);
+  setTimeout(()=>cinematic.classList.add('blackout'),6070);
+  setTimeout(()=>{cinematic.classList.add('name-reveal');startNameParticles()},6400);
+  setTimeout(()=>cinematic.classList.add('reveal'),8300);
+  setTimeout(()=>{if(navigator.vibrate)navigator.vibrate([55,40,90])},8600);
+  setTimeout(()=>cinematic.classList.add('letter-flight'),9600);
+  setTimeout(()=>cinematic.classList.add('fade'),11150);
   setTimeout(()=>{
     finalCard.classList.add('show');
     stage.classList.remove('cinematic-mode');
     fadeMusic(.6,1000);
-  },7150);
+  },11700);
   setTimeout(()=>{
-    cinematic.classList.remove('show','fade','reveal','name-reveal');
+    cinematic.classList.remove('show','fade','reveal','name-reveal','heartbeat','fly-through','blackout','letter-flight');
     cinematic.setAttribute('aria-hidden','true');
     heartFlight.innerHTML='';
-  },8000);
+    nameCtx.clearRect(0,0,nameParticles.width,nameParticles.height);
+  },12600);
 }
 
 let moonTimer;
